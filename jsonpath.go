@@ -116,6 +116,9 @@ func (c *Compiled) Lookup(obj interface{}) (interface{}, error) {
 				}
 			}
 			if argsv, ok := s.args.([2]interface{}); ok == true {
+				if obj == nil {
+					return nil, fmt.Errorf("key=%s value is null", s.key)
+				}
 				obj, err = get_range(obj, argsv[0], argsv[1])
 				if err != nil {
 					return nil, err
